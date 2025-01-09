@@ -1,0 +1,121 @@
+body {
+    font-family: Arial, sans-serif;
+    background-image: url('../background/BG2.jpg'); /* Replace with your image path */
+    background-size: cover; /* Ensures the image covers the entire screen */
+    background-position: center; /* Centers the image */
+    background-attachment: fixed; /* Keeps the background static during scrolling */
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+}
+
+.container {
+    background-color: rgba(255, 255, 255, 0.9); /* Slight transparency */
+    padding: 40px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    width: 100%;
+    max-width: 1200px;
+    margin: auto;
+}
+
+h1 {
+    margin-bottom: 20px;
+    color: rgb(84, 115, 180);
+}
+
+.gallery {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr); /* Create 5 equal-width columns */
+    gap: 15px; /* Space between images */
+}
+
+.image-card {
+    width: 100%;
+    padding: 5px;
+    position: relative;
+    overflow: hidden;
+    border-radius: 8px;
+    background-color: #a3a8ad;
+    box-shadow: 0 4px 6px rgba(199, 29, 29, 0.1);
+}
+
+.image-card img {
+    width: 100%; /* Ensures the image fills the card */
+    height: 150px; /* Set a uniform height */
+    object-fit: cover; /* Ensures the image fills the space */
+    border-radius: 8px;
+    transition: transform 0.3s ease;
+}
+
+.image-card:hover img {
+    transform: scale(1.05); /* Slight zoom effect on hover */
+}
+
+.actions {
+    margin-top: 10px;
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+}
+
+.btn {
+    text-decoration: none;
+    padding: 8px 12px;
+    background-color: #007bff; /* Blue color */
+    color: white;
+    border-radius: 4px;
+    font-size: 14px;
+    transition: background-color 0.3s ease;
+    border: none; /* For consistency in appearance */
+    cursor: pointer; /* Pointer cursor for better UX */
+}
+
+.btn:hover {
+    background-color: #0056b3;
+}
+
+.btn-danger {
+    background-color: #dc3545;
+}
+
+.btn-danger:hover {
+    background-color: #a71d2a;
+}
+
+form .btn {
+    display: inline-block; /* To match the appearance of anchor buttons */
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+    .gallery {
+        grid-template-columns: repeat(3, 1fr); /* Reduce to 3 columns */
+    }
+}
+
+@media (max-width: 768px) {
+    .gallery {
+        grid-template-columns: repeat(2, 1fr); /* Reduce to 2 columns */
+    }
+
+    .container {
+        padding: 20px;
+    }
+}
+
+@media (max-width: 480px) {
+    .gallery {
+        grid-template-columns: 1fr; /* Single column */
+    }
+
+    h1 {
+        font-size: 1.5rem; /* Adjust heading size */
+    }
+
+    .btn {
+        font-size: 12px; /* Adjust button size */
+        padding: 6px 10px;
+    }
+}
