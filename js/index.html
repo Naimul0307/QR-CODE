@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Wi-Fi and Access QR Code Generator</title>
+  <link rel="stylesheet" href="css/index.css">
+</head>
+<body>
+  <div class="container">
+    <!-- Button to go to the gallery page -->
+    <a href="gallery.php" class="gallery-btn">Go to Gallery</a>
+    
+    <h2>Access QR Code</h2>
+    <hr>
+
+    <!-- QR Code Display Section -->
+    <div class="qr-container">
+      <div id="accessTitle" class="qr-code-title">Scan the QR Code to access this page!</div>
+      <div id="accessQRCode" class="qr-code"></div>
+    </div>
+  </div>
+
+  <script src="js/index.js"></script>
+  <script src="js/qrcode.min.js"></script>
+</body>
+</html>

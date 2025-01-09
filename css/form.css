@@ -1,11 +1,12 @@
 body {
     font-family: Arial, sans-serif;
-    background-image: url('../background/BG2.jpg'); /* Replace with your image path */
+    background-image: url('../background/'); /* Replace with your image path */
     background-size: cover; /* Ensures the image covers the entire screen */
     background-position: center; /* Centers the image */
     background-attachment: fixed; /* Keeps the background static during scrolling */
     margin: 0;
     padding: 0;
+    background-color: #f0f0f0;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -84,21 +85,36 @@ form button:hover {
     background-color: #0056b3;
 }
 
+.logo-container {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.logo {
+    max-width: 100%; /* Ensures the logo doesn't exceed its container's width */
+    height: auto; /* Maintains the aspect ratio */
+    max-height: 150px; /* Sets a reasonable maximum height */
+}
+
 /* Responsive Design */
 @media (max-width: 768px) {
+    .logo {
+        max-height: 120px; /* Adjust size for tablets */
+    }
+
     h1 {
         font-size: 20px;
     }
-    
+
     .alert {
         font-size: 16px;
         padding: 15px;
     }
-    
+
     form input[type="file"] {
         font-size: 14px;
     }
-    
+
     form button {
         font-size: 14px;
         padding: 10px;
@@ -106,6 +122,10 @@ form button:hover {
 }
 
 @media (max-width: 480px) {
+    .logo {
+        max-height: 100px; /* Adjust size for smaller screens */
+    }
+
     .container {
         padding: 15px;
     }
@@ -124,3 +144,4 @@ form button:hover {
         padding: 8px;
     }
 }
+

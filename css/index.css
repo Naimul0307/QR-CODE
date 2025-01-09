@@ -1,10 +1,10 @@
-/* Center the entire content */
 body {
   font-family: Arial, sans-serif;
-  background-image: url('../background/BG2.jpg'); /* Replace with your image path */
-  background-size: cover; /* Ensures the image covers the entire screen */
-  background-position: center; /* Centers the image */
-  background-attachment: fixed; /* Keeps the background static during scrolling */
+  background-image: url('../background/');
+  background-color: #f0f0f0;
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
   margin: 0;
   padding: 0;
   display: flex;
@@ -15,7 +15,7 @@ body {
 
 .container {
   text-align: center;
-  background-color: rgba(255, 255, 255, 0.9); /* Adds slight transparency */
+  background-color: rgba(255, 255, 255, 0.9);
   border-radius: 8px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   padding: 20px;

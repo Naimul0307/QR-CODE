@@ -1,27 +1,30 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Wi-Fi and Access QR Code Generator</title>
-  <script src="https://cdn.jsdelivr.net/npm/qrcode@1.4.4/build/qrcode.min.js"></script>
-  <link rel="stylesheet" href="css/index.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Upload Image</title>
+    <link rel="stylesheet" href="css/form.css">
 </head>
 <body>
-  <div class="container">
-    <!-- Button to go to the gallery page -->
-    <a href="gallery.php" class="gallery-btn">Go to Gallery</a>
-    
-    <h2>Access QR Code</h2>
-    <hr>
+    <div class="container">
+        <!-- Logo Section -->
+        <div class="logo-container">
+            <img src="background/logo.png" alt="Logo" class="logo">
+        </div>
+        
+        <div id="successMessage" class="alert">Image uploaded successfully!</div>
 
-    <!-- QR Code Display Section -->
-    <div class="qr-container">
-      <div id="accessTitle" class="qr-code-title">Scan the QR Code to access this page!</div>
-      <div id="accessQRCode" class="qr-code"></div>
+        <h1>Upload Image</h1>
+        <form action="php/upload.php" method="POST" enctype="multipart/form-data">
+            <input type="file" name="image" accept="image/*" id="imageInput" required>
+            <div class="preview-container">
+                <h3>Image Preview:</h3>
+                <img id="imagePreview" src="" alt="Image Preview">
+            </div>
+            <button type="submit" name="submit">Upload</button>
+        </form>
     </div>
-  </div>
-
-  <script src="js/index.js"></script>
+<script src="js/form.js"></script>
 </body>
 </html>
