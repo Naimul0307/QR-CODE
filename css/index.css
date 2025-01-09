@@ -102,9 +102,22 @@ button:hover {
   background-color: #45a049;
 }
 
+.logo-container {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.logo {
+  max-width: 100%; /* Ensures the logo doesn't exceed its container's width */
+  height: auto; /* Maintains the aspect ratio */
+  max-height: 150px; /* Sets a reasonable maximum height */
+}
 
 /* Responsive Design */
 @media (max-width: 768px) {
+    .logo {
+      max-height: 120px; /* Adjust size for tablets */
+  }
   .container {
     padding: 15px;
   }
@@ -133,6 +146,9 @@ button:hover {
 }
 
 @media (max-width: 480px) {
+    .logo {
+      max-height: 100px;
+  }
   .container {
     padding: 10px;
   }

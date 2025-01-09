@@ -12,6 +12,10 @@ $images = glob($directory . '*'); // Get all files in the images directory
 </head>
 <body>
     <div class="container">
+        <div class="logo-container">
+        <img src="background/logo.png" alt="Logo" class="logo">
+        </div>
+        <hr>
         <h1>Image Gallery</h1>
         <hr>
         <div class="gallery">

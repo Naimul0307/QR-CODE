@@ -89,6 +89,18 @@ form .btn {
     display: inline-block; /* To match the appearance of anchor buttons */
 }
 
+
+.logo-container {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.logo {
+    max-width: 70%;
+    height: auto; /* Maintains the aspect ratio */
+    max-height: 150px; /* Sets a reasonable maximum height */
+}
+
 /* Responsive Design */
 @media (max-width: 1024px) {
     .gallery {
@@ -97,6 +109,9 @@ form .btn {
 }
 
 @media (max-width: 768px) {
+    .logo {
+        max-height: 120px; /* Adjust size for tablets */
+    }
     .gallery {
         grid-template-columns: repeat(2, 1fr); /* Reduce to 2 columns */
     }
@@ -107,6 +122,9 @@ form .btn {
 }
 
 @media (max-width: 480px) {
+    .logo {
+        max-height: 100px;
+    }
     .gallery {
         grid-template-columns: 1fr; /* Single column */
     }
