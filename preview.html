@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Preview Image</title>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f9f9f9;
+        }
+
+        img {
+            border: 2px solid #ccc;
+            max-width: 90%;
+            max-height: 70%;
+            margin-bottom: 20px;
+        }
+
+        .button-container {
+            display: flex;
+            gap: 20px;
+        }
+
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            border: none;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+
+        button#likeBtn {
+            background-color: #4CAF50; /* Green */
+            color: white;
+        }
+
+        button#likeBtn:hover {
+            background-color: #45a049;
+        }
+
+        button#retryBtn {
+            background-color: #f44336; /* Red */
+            color: white;
+        }
+
+        button#retryBtn:hover {
+            background-color: #d32f2f;
+        }
+    </style>
+</head>
+<body>
+    <img id="previewImage" alt="Captured Image">
+
+    <div class="button-container">
+        <button id="likeBtn">I Like It</button>
+        <button id="retryBtn">Try Again</button>
+    </div>
+
+    <script>
+        // Retrieve the captured image from localStorage
+        const capturedImage = localStorage.getItem("capturedImage");
+
+        // Display the captured image
+        if (capturedImage) {
+            document.getElementById("previewImage").src = capturedImage;
+        } else {
+            alert("No image to preview!");
+            window.location.href = "index.html"; // Redirect back if no image found
+        }
+
+        // Handle "I Like It" button click
+        document.getElementById("likeBtn").addEventListener("click", () => {
+            window.location.href = "submit.html"; // Redirect to the submit page
+        });
+
+        // Handle "Try Again" button click
+        document.getElementById("retryBtn").addEventListener("click", () => {
+            window.location.href = "camera.html"; // Redirect to the camera page
+        });
+    </script>
+</body>
+</html>

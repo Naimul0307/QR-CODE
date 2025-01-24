@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Submit Image</title>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f9f9f9;
+        }
+
+        img {
+            border: 2px solid #ccc;
+            max-width: 90%;
+            max-height: 70%;
+            margin-bottom: 20px;
+        }
+
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            border: none;
+            border-radius: 5px;
+            background-color: #4CAF50; /* Green */
+            color: white;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <img id="previewImage" alt="Captured Image">
+    <button id="uploadBtn">Upload</button>
+
+    <script>
+        // Retrieve the captured image from localStorage
+        const capturedImage = localStorage.getItem("capturedImage");
+
+        // Display the captured image
+        if (capturedImage) {
+            document.getElementById("previewImage").src = capturedImage;
+        } else {
+            alert("No image to submit!");
+            window.location.href = "camera.html"; // Redirect back to camera if no image found
+        }
+
+        // Handle "Upload" button click
+        document.getElementById("uploadBtn").addEventListener("click", async () => {
+            try {
+                // Send the image data to the server using fetch
+                const response = await fetch("php/saveImage.php", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify({ image: capturedImage }) // Send the image data as JSON
+                });
+
+                if (response.ok) {
+                    localStorage.removeItem("capturedImage"); // Clear the captured image from localStorage
+                    window.location.href = "thankyou.html"; // Redirect to thank you page
+                } else {
+                    alert("Failed to upload image. Please try again.");
+                }
+            } catch (error) {
+                console.error("Error uploading image:", error);
+                alert("An error occurred while uploading the image.");
+            }
+        });
+    </script>
+</body>
+</html>

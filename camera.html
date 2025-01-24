@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Capture Image</title>
+    <link rel="stylesheet" href="css/form.css">
+    <style>
+        #cameraContainer {
+            margin-top: 20px;
+        }
+
+        canvas {
+            display: none;
+        }
+
+        #timer {
+            font-size: 20px;
+            font-weight: bold;
+            color: red;
+            margin-top: 10px;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <header class="logo-container">
+        <img src="background/logo.png" alt="Logo" class="logo">
+    </header>
+    <div class="container">
+        <!-- Video container for the camera feed -->
+        <div id="cameraContainer" style="display:none;">
+            <video id="video" width="300" height="200" autoplay></video>
+            <canvas id="canvas"></canvas>
+            <div id="timer">5</div>
+        </div>
+
+        <!-- Button to open the camera -->
+        <button type="button" id="openCameraBtn">Camera</button>
+    </div>
+
+    <script>
+        const openCameraBtn = document.getElementById("openCameraBtn");
+        const cameraContainer = document.getElementById("cameraContainer");
+        const video = document.getElementById("video");
+        const canvas = document.getElementById("canvas");
+        const timerElement = document.getElementById("timer");
+        let stream;
+
+        openCameraBtn.addEventListener("click", async () => {
+            // Show the camera container
+            cameraContainer.style.display = "block";
+            timerElement.style.display = "block";
+
+            // Access the user's camera
+            try {
+                stream = await navigator.mediaDevices.getUserMedia({ video: true });
+                video.srcObject = stream;
+
+                // Start the countdown timer
+                startCountdown(5, captureImage);
+            } catch (err) {
+                console.error("Error accessing the camera: ", err);
+                alert("Could not access the camera. Please check your permissions.");
+            }
+        });
+
+        function startCountdown(seconds, callback) {
+            let remainingTime = seconds;
+
+            // Update the timer every second
+            const interval = setInterval(() => {
+                timerElement.textContent = remainingTime;
+                remainingTime--;
+
+                // If time is up, stop the interval and execute the callback
+                if (remainingTime < 0) {
+                    clearInterval(interval);
+                    timerElement.style.display = "none"; // Hide the timer
+                    callback();
+                }
+            }, 1000);
+        }
+
+        function captureImage() {
+            // Draw the video frame on the canvas
+            const context = canvas.getContext("2d");
+            canvas.width = video.videoWidth;
+            canvas.height = video.videoHeight;
+            context.drawImage(video, 0, 0, canvas.width, canvas.height);
+
+            // Get the image data URL
+            const imageDataURL = canvas.toDataURL("image/png");
+
+            // Redirect to the preview page with the image data
+            localStorage.setItem("capturedImage", imageDataURL);
+            window.location.href = "preview.html";
+
+            // Stop the camera stream
+            stopCamera();
+        }
+
+        function stopCamera() {
+            // Stop all video streams
+            if (stream) {
+                const tracks = stream.getTracks();
+                tracks.forEach(track => track.stop());
+            }
+            cameraContainer.style.display = "none";
+        }
+    </script>
+</body>
+</html>

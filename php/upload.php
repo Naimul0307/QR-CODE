@@ -12,8 +12,8 @@ if (isset($_POST['submit'])) {
         } else {
             // Move the uploaded file to the images folder
             if (move_uploaded_file($uploadedFile['tmp_name'], $filePath)) {
-                // Redirect to form.html with a success message
-                header("Location: ../index.html?success=1"); // Corrected path to form.html
+                // Redirect to thanks.html page
+                header("Location: ../thankyou.html"); 
                 exit(); // Stop further script execution
             } else {
                 echo 'Failed to upload image.';
