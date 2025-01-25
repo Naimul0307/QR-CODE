@@ -1,6 +1,10 @@
 <?php
-$directory = 'images/'; // Path to the images folder
-$images = glob($directory . '*'); // Get all files in the images directory
+$directory = 'images/';
+$images = glob($directory . '*'); 
+
+usort($images, function ($a, $b) {
+    return filemtime($b) - filemtime($a);
+});
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -13,7 +17,7 @@ $images = glob($directory . '*'); // Get all files in the images directory
 <body>
     <div class="container">
         <div class="logo-container">
-        <img src="background/logo.png" alt="Logo" class="logo">
+            <img src="background/logo.png" alt="Logo" class="logo">
         </div>
         <hr>
         <h1>Image Gallery</h1>
@@ -38,4 +42,4 @@ $images = glob($directory . '*'); // Get all files in the images directory
         </div>
     </div>
 </body>
-</html> 
+</html>
