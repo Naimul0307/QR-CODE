@@ -18,19 +18,19 @@ if (isset($data['image'])) {
 
     // Check if the 'images' folder exists
     if (!is_dir($uploadDirectory)) {
-        mkdir($uploadDirectory, 0777, true); // Create the folder if it doesn't exist
+        mkdir($uploadDirectory, 0777, true);
     }
 
     // Save the image file
     if (file_put_contents($filePath, $imageData)) {
-        http_response_code(200); // Success
+        http_response_code(200);
         echo json_encode(['message' => 'Image uploaded successfully', 'fileName' => $fileName]);
     } else {
-        http_response_code(500); // Internal Server Error
+        http_response_code(500);
         echo json_encode(['message' => 'Failed to save the image']);
     }
 } else {
-    http_response_code(400); // Bad Request
+    http_response_code(400);
     echo json_encode(['message' => 'No image data received']);
 }
 ?>

@@ -4,39 +4,156 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Capture Image</title>
-    <link rel="stylesheet" href="css/form.css">
     <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: url('../background/BG2.jpg') no-repeat center center/cover;
+            color: #111010;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 80vh;
+            text-align: center;
+        }
+
+        .logo-container {
+            margin-bottom: 5px;
+            width: 300px;
+            height: 150px;
+            background: url('background/logo.png') no-repeat center center/contain;
+        }
+
+        .container {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            width: 90%;
+            max-width: 700px;
+            text-align: center;
+        }
+
+        h1 {
+            font-size: 2rem;
+            margin-bottom: 20px;
+        }
+
         #cameraContainer {
+            display: none;
             margin-top: 20px;
+            position: relative; /* Allow video to cover the container */
+        }
+
+        video {
+            width: 100%;
+            height: 100%; /* Ensures the video covers the entire canvas area */
+            object-fit: cover; /* Ensures the video fills the canvas, maintaining aspect ratio */
+            border-radius: 10px;
+            margin-bottom: 10px;
         }
 
         canvas {
-            display: none;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border-radius: 10px;
+            z-index: 2; /* Ensures canvas is on top of video for capturing */
         }
 
         #timer {
-            font-size: 20px;
+            font-size: 1.5rem;
             font-weight: bold;
             color: red;
             margin-top: 10px;
             display: none;
         }
+
+        .start-btn, #openCameraBtn {
+            background-color: #ff6b6b;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 1rem;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .start-btn:hover, #openCameraBtn:hover {
+            background-color: #ff4d4d;
+        }
+
+        @media (max-width: 1024px) {
+            h1 {
+                font-size: 1.8rem;
+            }
+
+            .container {
+                padding: 15px;
+            }
+
+            .logo-container {
+                width: 200px;
+                height: 100px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 1.6rem;
+            }
+
+            .container {
+                padding: 10px;
+            }
+
+            .logo-container {
+                width: 180px;
+                height: 90px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            h1 {
+                font-size: 1.4rem;
+            }
+
+            .container {
+                padding: 10px;
+            }
+
+            .logo-container {
+                width: 200px;
+                height: 80px;
+            }
+
+            #openCameraBtn {
+                padding: 8px 16px;
+                font-size: 0.9rem;
+            }
+        }
     </style>
 </head>
 <body>
-    <header class="logo-container">
-        <img src="background/logo.png" alt="Logo" class="logo">
-    </header>
+    <header class="logo-container"></header>
+    <hr>
     <div class="container">
-        <!-- Video container for the camera feed -->
-        <div id="cameraContainer" style="display:none;">
-            <video id="video" width="300" height="200" autoplay></video>
+        <h1>Capture Image</h1>
+        <div id="cameraContainer">
+            <video id="video" autoplay></video>
             <canvas id="canvas"></canvas>
-            <div id="timer">5</div>
+            <div id="timer">0</div>
         </div>
-
-        <!-- Button to open the camera -->
-        <button type="button" id="openCameraBtn">Camera</button>
+        <button type="button" id="openCameraBtn">Open Camera</button>
     </div>
 
     <script>
@@ -46,62 +163,64 @@
         const canvas = document.getElementById("canvas");
         const timerElement = document.getElementById("timer");
         let stream;
-
+    
         openCameraBtn.addEventListener("click", async () => {
-            // Show the camera container
             cameraContainer.style.display = "block";
             timerElement.style.display = "block";
-
-            // Access the user's camera
+    
             try {
                 stream = await navigator.mediaDevices.getUserMedia({ video: true });
                 video.srcObject = stream;
-
-                // Start the countdown timer
+    
+                // Wait until the video metadata is loaded to sync sizes
+                video.addEventListener("loadedmetadata", () => {
+                    syncVideoAndCanvasSize();
+                });
+    
                 startCountdown(5, captureImage);
             } catch (err) {
                 console.error("Error accessing the camera: ", err);
                 alert("Could not access the camera. Please check your permissions.");
             }
         });
-
+    
+        function syncVideoAndCanvasSize() {
+            const aspectRatio = video.videoWidth / video.videoHeight;
+    
+            // Match canvas size to video dimensions
+            canvas.width = video.videoWidth;
+            canvas.height = video.videoHeight;
+    
+            // Dynamically set the height of video and canvas to maintain aspect ratio
+            video.style.height = `${video.offsetWidth / aspectRatio}px`;
+            canvas.style.height = `${canvas.offsetWidth / aspectRatio}px`;
+        }
+    
         function startCountdown(seconds, callback) {
             let remainingTime = seconds;
-
-            // Update the timer every second
+    
             const interval = setInterval(() => {
                 timerElement.textContent = remainingTime;
                 remainingTime--;
-
-                // If time is up, stop the interval and execute the callback
+    
                 if (remainingTime < 0) {
                     clearInterval(interval);
-                    timerElement.style.display = "none"; // Hide the timer
+                    timerElement.style.display = "none";
                     callback();
                 }
             }, 1000);
         }
-
+    
         function captureImage() {
-            // Draw the video frame on the canvas
             const context = canvas.getContext("2d");
-            canvas.width = video.videoWidth;
-            canvas.height = video.videoHeight;
             context.drawImage(video, 0, 0, canvas.width, canvas.height);
-
-            // Get the image data URL
+    
             const imageDataURL = canvas.toDataURL("image/png");
-
-            // Redirect to the preview page with the image data
             localStorage.setItem("capturedImage", imageDataURL);
             window.location.href = "preview.html";
-
-            // Stop the camera stream
-            stopCamera();
         }
-
+    
         function stopCamera() {
-            // Stop all video streams
             if (stream) {
                 const tracks = stream.getTracks();
                 tracks.forEach(track => track.stop());
@@ -109,5 +228,6 @@
             cameraContainer.style.display = "none";
         }
     </script>
+    
 </body>
 </html>

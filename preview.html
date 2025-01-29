@@ -3,38 +3,72 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="css/form.css">
     <title>Preview Image</title>
     <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
         body {
+            font-family: Arial, sans-serif;
+            background: url('background/bg-image.jpg') no-repeat center center/cover;
+            color: #111010;
             display: flex;
             flex-direction: column;
-            justify-content: center;
             align-items: center;
+            justify-content: center;
             height: 100vh;
-            margin: 0;
-            background-color: #f9f9f9;
+            text-align: center;
+            padding: 20px;
+        }
+
+        .logo-container {
+            margin-bottom: 5px;
+            width: 300px; /* Increased size */
+            height: 150px; /* Increased size */
+            background: url('background/logo.png') no-repeat center center/contain;
+        }
+
+        .container {
+            background: rgba(255, 255, 255, 0.8);
+            padding: 40px 30px; /* Increased padding */
+            border-radius: 15px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+            text-align: center;
+            width: 100%;
+            max-width: 600px; /* Increased max-width */
+        }
+
+        h1 {
+            font-size: 2.5rem; /* Increased font size */
+            margin-bottom: 20px;
         }
 
         img {
             border: 2px solid #ccc;
-            max-width: 90%;
-            max-height: 70%;
+            width: 100%;
+            max-height: 500px; /* Increased max-height */
+            object-fit: contain;
             margin-bottom: 20px;
         }
 
         .button-container {
             display: flex;
             gap: 20px;
+            justify-content: center;
+            margin-top: 20px;
         }
 
         button {
-            padding: 10px 20px;
-            font-size: 16px;
+            padding: 12px 24px; /* Increased padding */
+            font-size: 18px; /* Increased font size */
             cursor: pointer;
             border: none;
             border-radius: 5px;
             transition: background-color 0.3s;
+            width: 140px; /* Increased button width */
         }
 
         button#likeBtn {
@@ -54,20 +88,60 @@
         button#retryBtn:hover {
             background-color: #d32f2f;
         }
+
+        /* Responsive Styles */
+        @media (max-width: 768px) {
+            .container {
+                padding: 30px;
+            }
+
+            h1 {
+                font-size: 2rem;
+            }
+
+            button {
+                font-size: 16px;
+                padding: 10px 20px;
+                width: 120px;
+            }
+
+            img {
+                max-height: 400px; /* Adjusted max-height */
+            }
+        }
+
+        @media (max-width: 480px) {
+            .logo-container {
+                width: 90%;
+            }
+
+            h1 {
+                font-size: 1.5rem;
+            }
+
+            button {
+                font-size: 14px;
+                padding: 8px 16px;
+                width: 110px;
+            }
+
+            img {
+                max-height: 350px; /* Adjusted max-height */
+            }
+        }
     </style>
 </head>
 <body>
-    <header class="logo-container">
-        <img src="background/logo.png" alt="Logo" class="logo">
-    </header>
-    
-    <img id="previewImage" alt="Captured Image">
+    <header class="logo-container"></header>
+    <div class="container">
+        <h1>Preview Your Image</h1>
+        <img id="previewImage" alt="Captured Image">
 
-    <div class="button-container">
-        <button id="likeBtn">I Like It</button>
-        <button id="retryBtn">Try Again</button>
+        <div class="button-container">
+            <button id="likeBtn">I Like It</button>
+            <button id="retryBtn">Try Again</button>
+        </div>
     </div>
-
     <script>
         // Retrieve the captured image from localStorage
         const capturedImage = localStorage.getItem("capturedImage");

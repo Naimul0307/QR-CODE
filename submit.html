@@ -4,22 +4,52 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Submit Image</title>
-    <link rel="stylesheet" href="css/form.css">
     <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
         body {
+            font-family: Arial, sans-serif;
+            background: url('background/bg-image.jpg') no-repeat center center/cover;
             display: flex;
             flex-direction: column;
-            justify-content: center;
             align-items: center;
-            height: 100vh;
-            margin: 0;
-            background-color: #f9f9f9;
+            justify-content: center;
+            height: 80vh;
+            text-align: center;
+            padding: 20px;
+        }
+
+        .logo-container {
+            margin-bottom: 10px;
+            width: 300px;
+            height: 150px;
+            background: url('background/logo.png') no-repeat center center/contain;
+        }
+
+        .container {
+            background: rgba(255, 255, 255, 0.8);
+            padding: 40px 30px;
+            border-radius: 15px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+            text-align: center;
+            width: 90%;
+            max-width: 700px;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
         }
 
         img {
             border: 2px solid #ccc;
-            max-width: 90%;
-            max-height: 70%;
+            width: 100%;
+            max-height: 500px;
+            object-fit: contain;
             margin-bottom: 20px;
         }
 
@@ -29,7 +59,7 @@
             cursor: pointer;
             border: none;
             border-radius: 5px;
-            background-color: #4CAF50; /* Green */
+            background-color: #4CAF50;
             color: white;
             transition: background-color 0.3s;
         }
@@ -37,42 +67,88 @@
         button:hover {
             background-color: #45a049;
         }
+
+        /* Progress Bar */
+        .progress-container {
+            width: 100%;
+            background-color: #ddd;
+            border-radius: 5px;
+            margin-top: 20px;
+            display: none;
+        }
+
+        .progress-bar {
+            width: 0%;
+            height: 10px;
+            background-color: #4CAF50;
+            border-radius: 5px;
+            transition: width 0.3s ease;
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2rem;
+            }
+
+            img {
+                max-height: 400px;
+            }
+        }
     </style>
 </head>
 <body>
-    <header class="logo-container">
-        <img src="background/logo.png" alt="Logo" class="logo">
-    </header>
-    <img id="previewImage" alt="Captured Image">
-    <button id="uploadBtn">Upload</button>
+    <header class="logo-container"></header>
+    <hr>
+    <div class="container">
+        <img id="previewImage" alt="Captured Image">
+        <button id="uploadBtn">Submit</button>
+        <div class="progress-container">
+            <div class="progress-bar" id="progressBar"></div>
+        </div>
+    </div>
 
     <script>
-        // Retrieve the captured image from localStorage
         const capturedImage = localStorage.getItem("capturedImage");
 
-        // Display the captured image
         if (capturedImage) {
             document.getElementById("previewImage").src = capturedImage;
         } else {
             alert("No image to submit!");
-            window.location.href = "camera.html"; // Redirect back to camera if no image found
+            window.location.href = "camera.html";
         }
 
-        // Handle "Upload" button click
         document.getElementById("uploadBtn").addEventListener("click", async () => {
+            const progressBar = document.getElementById("progressBar");
+            const progressContainer = document.querySelector(".progress-container");
+
+            progressContainer.style.display = "block";
+            progressBar.style.width = "0%";
+
             try {
-                // Send the image data to the server using fetch
+                let progress = 0;
+                const progressInterval = setInterval(() => {
+                    if (progress < 90) {
+                        progress += 10;
+                        progressBar.style.width = progress + "%";
+                    }
+                }, 300);
+
                 const response = await fetch("php/saveImage.php", {
                     method: "POST",
                     headers: {
                         "Content-Type": "application/json"
                     },
-                    body: JSON.stringify({ image: capturedImage }) // Send the image data as JSON
+                    body: JSON.stringify({ image: capturedImage })
                 });
 
+                clearInterval(progressInterval);
+                progressBar.style.width = "100%";
+
                 if (response.ok) {
-                    localStorage.removeItem("capturedImage"); // Clear the captured image from localStorage
-                    window.location.href = "thankyou.html"; // Redirect to thank you page
+                    localStorage.removeItem("capturedImage");
+                    setTimeout(() => {
+                        window.location.href = "thankyou.html";
+                    }, 500);
                 } else {
                     alert("Failed to upload image. Please try again.");
                 }

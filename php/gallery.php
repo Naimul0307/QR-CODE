@@ -1,5 +1,5 @@
 <?php
-$directory = 'images/';
+$directory = '../images/';
 $images = glob($directory . '*'); 
 
 usort($images, function ($a, $b) {
@@ -12,12 +12,12 @@ usort($images, function ($a, $b) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Image Gallery</title>
-    <link rel="stylesheet" href="css/gallery.css">
+    <link rel="stylesheet" href=../css/gallery.css>
 </head>
 <body>
     <div class="container">
         <div class="logo-container">
-            <img src="background/logo.png" alt="Logo" class="logo">
+            <img src="../background/logo.png" alt="Logo" class="logo">
         </div>
         <hr>
         <h1>Image Gallery</h1>
