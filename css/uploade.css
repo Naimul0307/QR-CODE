@@ -1,0 +1,118 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    color: #111010;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    text-align: center;
+    padding: 20px;
+    background: url('../background/bg-portrait.jpg') no-repeat center center/cover;
+    }
+    
+    /* Landscape mode background */
+    @media (orientation: landscape) {
+        body {
+            background: url('../background/bg-landscape.jpg') no-repeat center center/cover;
+        }
+    }
+    
+    
+    .logo-container {
+        margin-bottom: 5px;
+        width: 300px;
+        height: 150px;
+        background: url('../background/logo.png') no-repeat center center/contain;
+    }
+
+.container {
+    background: rgba(255, 255, 255, 0.2);
+    padding: 30px 20px;
+    border-radius: 15px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+    text-align: center;
+    width: 90%;
+    max-width: 700px;
+}
+
+h1 {
+    font-size: 2rem;
+    margin-bottom: 20px;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+input[type="file"] {
+margin-bottom: 15px;
+font-size: 0.9rem;  /* Reduce font size */
+padding: 5px 8px;  /* Adjust padding */
+width: 200px;  /* Set a fixed width */
+border: 1px solid #ccc;
+border-radius: 5px;
+cursor: pointer;
+}
+
+.preview-container {
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.preview-container img {
+    max-width: 100%;
+    max-height: 150px;
+    border: 2px solid #ddd;
+    border-radius: 10px;
+    display: none;
+}
+
+.progress-container {
+    width: 100%;
+    background-color: #ddd;
+    border-radius: 5px;
+    margin-top: 20px;
+    display: none;
+}
+
+.progress-bar {
+    width: 0%;
+    height: 10px;
+    background-color: #4CAF50;
+    border-radius: 5px;
+    transition: width 0.3s ease;
+}
+
+button {
+    background-color: #ff6b6b;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    font-size: 1rem;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+button:hover {
+    background-color: #ff4d4d;
+}
+
+.alert {
+    background-color: #d4edda;
+    color: #155724;
+    padding: 10px;
+    border-radius: 5px;
+    margin-bottom: 20px;
+    border: 1px solid #c3e6cb;
+    display: none;
+}

@@ -4,92 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Thank You</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: Arial, sans-serif;
-            background: url('background/bg-image.jpg') no-repeat center center/cover;
-            color: #111010;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            height: 80vh;
-            text-align: center;
-            padding: 20px;
-        }
-
-        .logo-container {
-            margin-bottom: 5px;
-            width: 300px; /* Increased size */
-            height: 150px; /* Increased size */
-            background: url('background/logo.png') no-repeat center center/contain;
-        }
-
-        .container {
-            background: rgba(255, 255, 255, 0.8);
-            padding: 40px 30px; /* Increased padding */
-            border-radius: 15px;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
-            text-align: center;
-            width: 90%;
-            max-width: 700px; /* Increased max-width */
-            margin-top: 60px;
-        }
-
-        h1 {
-            font-size: 2.5rem; /* Increased font size */
-            margin-bottom: 20px;
-            color: #4CAF50;
-        }
-
-        /* Responsive Styles */
-        @media (max-width: 768px) {
-            .container {
-                padding: 30px 20px; /* Adjusted padding for smaller screens */
-            }
-
-            h1 {
-                font-size: 2rem; /* Adjusted font size for smaller screens */
-            }
-
-            .logo-container {
-                width: 80%; /* Adjusted logo size for smaller screens */
-                height: auto; /* Auto height to maintain aspect ratio */
-            }
-        }
-
-        @media (max-width: 480px) {
-            .container {
-                padding: 20px; /* Adjusted padding for very small screens */
-            }
-
-            h1 {
-                font-size: 1.5rem; /* Smaller font size for small screens */
-            }
-
-            .logo-container {
-                width: 90%; /* Further reduced logo size */
-                height: auto;
-            }
-        }
-    </style>
+    <link rel="stylesheet" href="css/thankyou.css">
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
 </head>
 <body>
     <header class="logo-container"></header>
     <div class="container">
         <h1>Thank You!</h1>
     </div>
-    <script>
-        // Redirect to index.html after 5 seconds
-        setTimeout(() => {
-            window.location.href = "index.html";
-        }, 5000);
-    </script>
+    <script src="js/thankyou.js"></script>
 </body>
 </html>

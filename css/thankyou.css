@@ -1,0 +1,81 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    color: #111010;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    text-align: center;
+    padding: 20px;
+    background: url('../background/bg-portrait.jpg') no-repeat center center/cover;
+    }
+    
+    /* Landscape mode background */
+    @media (orientation: landscape) {
+        body {
+            background: url('../background/bg-landscape.jpg') no-repeat center center/cover;
+        }
+    }
+    
+    
+    .logo-container {
+        margin-bottom: 5px;
+        width: 300px;
+        height: 150px;
+        background: url('../background/logo.png') no-repeat center center/contain;
+    }
+
+.container {
+    background: rgba(255, 255, 255, 0.8);
+    padding: 40px 30px; /* Increased padding */
+    border-radius: 15px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+    text-align: center;
+    width: 90%;
+    max-width: 700px; /* Increased max-width */
+    margin-top: 60px;
+}
+
+h1 {
+    font-size: 2.5rem; /* Increased font size */
+    margin-bottom: 20px;
+    color: #4CAF50;
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+    .container {
+        padding: 30px 20px; /* Adjusted padding for smaller screens */
+    }
+
+    h1 {
+        font-size: 2rem; /* Adjusted font size for smaller screens */
+    }
+
+    .logo-container {
+        width: 80%; /* Adjusted logo size for smaller screens */
+        height: auto; /* Auto height to maintain aspect ratio */
+    }
+}
+
+@media (max-width: 480px) {
+    .container {
+        padding: 20px; /* Adjusted padding for very small screens */
+    }
+
+    h1 {
+        font-size: 1.5rem; /* Smaller font size for small screens */
+    }
+
+    .logo-container {
+        width: 90%; /* Further reduced logo size */
+        height: auto;
+    }
+}

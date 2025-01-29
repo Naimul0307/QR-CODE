@@ -8,8 +8,15 @@ body {
     margin: 0;
     padding: 0;
     min-height: 100vh;
+    background: url('../background/bg-portrait.jpg') no-repeat center center/cover;
 }
 
+/* Landscape mode background */
+@media (orientation: landscape) {
+    body {
+        background: url('../background/bg-landscape.jpg') no-repeat center center/cover;
+    }
+}
 .container {
     background-color: rgba(255, 255, 255, 0.9); /* Slight transparency */
     padding: 40px;
